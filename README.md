@@ -85,8 +85,8 @@ The `contracts` directory contains the current Solidity smart contract draft. Ad
 The following software is required to work with the current project:
 
 - Git
-- Node.js
-- npm
+- Node.js (tested with v26.13.0)
+- npm (tested with v11.20.0)
 
 The current development environment uses Hardhat with Solidity and Ethers.js.
 
