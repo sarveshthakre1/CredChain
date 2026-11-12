@@ -1,0 +1,553 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>CredChain · Academic Credential Verification</title>
+
+  <link rel="stylesheet" href="/style.css">
+  <script src="/app.js" defer></script>
+</head>
+
+<body>
+  <aside class="sidebar">
+    <a class="brand" href="/">
+      <span class="brand-mark">
+        C<span>✓</span>
+      </span>
+
+      <span>
+        CredChain
+        <small>ACADEMIC CREDENTIALS</small>
+      </span>
+    </a>
+
+    <nav aria-label="Stakeholder views">
+      <button
+        class="nav active"
+        data-page="overview"
+        aria-current="page"
+      >
+        <span>◈</span> Overview
+      </button>
+
+      <button class="nav" data-page="issuer">
+        <span>▤</span> University
+      </button>
+
+      <button class="nav" data-page="student">
+        <span>▱</span> Student wallet
+      </button>
+
+      <button class="nav" data-page="verifier">
+        <span>◎</span> Employer verifier
+      </button>
+
+      <button class="nav" data-page="activity">
+        <span>↗</span> Blockchain activity
+      </button>
+    </nav>
+
+    <div class="side-bottom">
+      ISSUE. SHARE. VERIFY.
+    </div>
+  </aside>
+
+  <main>
+    <header class="topbar">
+      <span>
+        Workspace /
+        <strong id="page-name">Overview</strong>
+      </span>
+    </header>
+
+    <div class="content">
+      <div class="network" id="network">
+        Checking Ethereum connection…
+      </div>
+
+      <div
+        class="notice"
+        id="notice"
+        role="status"
+        aria-live="polite"
+        hidden
+      ></div>
+
+      <!-- Overview -->
+      <section class="page" id="overview">
+        <div class="eyebrow">
+          TRUST STARTS WITH A CHECKABLE RECORD
+        </div>
+
+        <h1>
+          Credentials with<br>
+          <span>proof behind them.</span>
+        </h1>
+
+        <p class="lead">
+          A Decentralized Academic Credential Verification System.
+          Issue an academic credential, share the signed document,
+          and check its current status against an Ethereum registry.
+        </p>
+
+        <div class="actions hero-actions">
+          <button class="primary" data-goto="issuer">
+            Issue a credential <span>↗</span>
+          </button>
+
+          <button class="secondary" data-goto="verifier">
+            Open employer verifier
+          </button>
+        </div>
+
+        <div class="overview-grid">
+          <article class="certificate">
+            <div class="cert-top">
+              <span class="seal">✓</span>
+
+              <div>
+                Arizona State University
+                <small>DIGITAL CREDENTIAL OFFICE</small>
+              </div>
+            </div>
+
+            <div class="cert-title">
+              Academic achievement.<br>
+              Cryptographic assurance.
+            </div>
+
+            <p>
+              The university signs the credential.<br>
+              The student chooses when to share it.<br>
+              The employer checks the original and its status.
+            </p>
+
+            <div class="cert-footer">
+              <span>Signed · Registered · Verifiable</span>
+              <span>↗</span>
+            </div>
+          </article>
+
+          <article class="card journey">
+            <div class="eyebrow">
+              THREE STAKEHOLDERS. ONE CLEAR FLOW.
+            </div>
+
+            <h2>From issued to verified.</h2>
+
+            <ol>
+              <li>
+                <span>01</span>
+                <div>
+                  <strong>University issues</strong>
+                  <p>
+                    Signs a credential and registers its digest.
+                  </p>
+                </div>
+              </li>
+
+              <li>
+                <span>02</span>
+                <div>
+                  <strong>Student shares</strong>
+                  <p>
+                    Downloads or copies the signed credential.
+                  </p>
+                </div>
+              </li>
+
+              <li>
+                <span>03</span>
+                <div>
+                  <strong>Employer verifies</strong>
+                  <p>
+                    Checks signature, integrity, issuer, and status.
+                  </p>
+                </div>
+              </li>
+
+              <li>
+                <span>04</span>
+                <div>
+                  <strong>University can revoke</strong>
+                  <p>
+                    A future verification reflects the change.
+                  </p>
+                </div>
+              </li>
+            </ol>
+          </article>
+        </div>
+
+        <div class="principles">
+          <div>
+            <span>ON-CHAIN</span>
+            <strong>Digests and status.</strong>
+            <p>
+              No student name or degree text is stored in the contract.
+            </p>
+          </div>
+
+          <div>
+            <span>OFF-CHAIN</span>
+            <strong>The signed credential.</strong>
+            <p>
+              The complete document can be saved and shared by its holder.
+            </p>
+          </div>
+
+          <div>
+            <span>TRUST BOUNDARY</span>
+            <strong>An approved issuer.</strong>
+            <p>
+              Cryptography checks the statement, not whether a degree was earned.
+            </p>
+          </div>
+        </div>
+
+        <p class="footnote">
+          Institution login and wallet authentication are planned enhancements.
+        </p>
+      </section>
+
+      <!-- University -->
+      <section class="page" id="issuer" hidden>
+        <div class="eyebrow">
+          STAKEHOLDER 01 / UNIVERSITY
+        </div>
+
+        <h1>Issue with a trusted identity.</h1>
+
+        <p class="lead">
+          Arizona State University uses an approved local Ethereum account.
+          Each issuance creates a transaction on the local development chain.
+        </p>
+
+        <div class="two-columns">
+          <article class="card">
+            <h2>Create an academic credential</h2>
+
+            <form id="issue-form">
+              <label>
+                Student name
+                <input
+                  name="name"
+                  value="Alex Student"
+                  required
+                  maxlength="120"
+                >
+              </label>
+
+              <label>
+                Degree or certificate
+                <input
+                  name="degree"
+                  value="Master of Science in Computer Science"
+                  required
+                  maxlength="120"
+                >
+              </label>
+
+              <label>
+                Validity in days
+                <input
+                  name="validDays"
+                  value="365"
+                  type="number"
+                  min="1"
+                  max="3650"
+                  required
+                >
+              </label>
+
+              <label>
+                Registered student DID
+                <textarea
+                  id="student-did"
+                  readonly
+                  rows="3"
+                ></textarea>
+              </label>
+
+              <button class="primary" type="submit">
+                Sign &amp; issue credential <span>↗</span>
+              </button>
+            </form>
+
+            <p class="footnote">
+              Credentials are issued to the registered student account.
+            </p>
+          </article>
+
+          <article class="card">
+            <h2>Issued document</h2>
+
+            <p class="muted">
+              The university signature covers the credential contents.
+              Download the complete JSON for the student to share.
+            </p>
+
+            <label>
+              Signed credential JSON
+              <textarea
+                id="issued-json"
+                rows="10"
+                readonly
+                placeholder="Issue a credential to see its signed document."
+              ></textarea>
+            </label>
+
+            <div class="actions">
+              <button class="secondary" id="download-issued">
+                Download JSON
+              </button>
+
+              <button class="primary" id="save-issued">
+                Add to student wallet
+              </button>
+            </div>
+
+            <div
+              id="issue-receipt"
+              class="receipt"
+              hidden
+            ></div>
+
+            <hr>
+
+            <h3>Revoke an issued credential</h3>
+
+            <label>
+              Credential ID
+              <input
+                id="revoke-id"
+                placeholder="Paste the credential ID"
+              >
+            </label>
+
+            <button class="danger" id="revoke">
+              Revoke credential
+            </button>
+
+            <div
+              id="revoke-receipt"
+              class="receipt"
+              hidden
+            ></div>
+          </article>
+        </div>
+      </section>
+
+      <!-- Student -->
+      <section class="page" id="student" hidden>
+        <div class="eyebrow">
+          STAKEHOLDER 02 / STUDENT
+        </div>
+
+        <h1>Keep it. Share it.</h1>
+
+        <p class="lead">
+          Save a signed credential in this browser, then download
+          or present it to the employer verifier.
+        </p>
+
+        <div class="two-columns">
+          <article class="card">
+            <h2>Student credential wallet</h2>
+
+            <p class="muted">
+              Credentials are saved in this browser and can be
+              downloaded or shared for verification.
+            </p>
+
+            <label>
+              Import credential JSON
+              <textarea
+                id="wallet-json"
+                rows="8"
+                placeholder="Paste the signed credential JSON."
+              ></textarea>
+            </label>
+
+            <label class="file-label">
+              Or select a credential file
+              <input
+                type="file"
+                id="wallet-file"
+                accept=".json,application/json"
+              >
+            </label>
+
+            <button class="primary" id="import-wallet">
+              Save credential to this browser
+            </button>
+          </article>
+
+          <article class="card">
+            <h2>Your saved credential</h2>
+
+            <div id="wallet-empty" class="empty">
+              Your wallet is ready for its first credential.
+            </div>
+
+            <div id="wallet-card" hidden>
+              <div class="pill">
+                IMPORTED · VERIFY BEFORE RELYING ON IT
+              </div>
+
+              <h3 id="wallet-name"></h3>
+              <p id="wallet-degree"></p>
+
+              <dl>
+                <dt>Institution</dt>
+                <dd id="wallet-institution"></dd>
+
+                <dt>Credential ID</dt>
+                <dd id="wallet-id"></dd>
+              </dl>
+
+              <div class="actions">
+                <button class="primary" id="present-wallet">
+                  Present to employer <span>↗</span>
+                </button>
+
+                <button class="secondary" id="download-wallet">
+                  Download JSON
+                </button>
+
+                <button class="secondary" id="forget-wallet">
+                  Remove
+                </button>
+              </div>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <!-- Employer -->
+      <section class="page" id="verifier" hidden>
+        <div class="eyebrow">
+          STAKEHOLDER 03 / EMPLOYER
+        </div>
+
+        <h1>
+          Verify the document.<br>
+          <span>Check the current status.</span>
+        </h1>
+
+        <p class="lead">
+          A valid-looking PDF is not enough. Compare the signed
+          credential with the issuer and the registry.
+        </p>
+
+        <div class="two-columns">
+          <article class="card">
+            <h2>Presented credential</h2>
+
+            <label>
+              Signed credential JSON
+              <textarea
+                id="verify-json"
+                rows="12"
+                placeholder="Paste the credential shared by the student."
+              ></textarea>
+            </label>
+
+            <label class="file-label">
+              Or select the shared file
+              <input
+                type="file"
+                id="verify-file"
+                accept=".json,application/json"
+              >
+            </label>
+
+            <div class="actions">
+              <button class="primary" id="verify">
+                Verify credential
+              </button>
+
+              <button class="secondary" id="tamper">
+                Prepare edited copy
+              </button>
+            </div>
+
+            <p class="footnote">
+              The edited-copy button changes the degree while keeping
+              the original signature, so you can test rejection.
+            </p>
+          </article>
+
+          <article class="card">
+            <h2>Verification result</h2>
+
+            <div class="empty" id="verification-empty">
+              Present a credential to inspect its verification checks.
+            </div>
+
+            <div id="verification-result" hidden>
+              <div
+                id="verification-status"
+                class="result"
+              ></div>
+
+              <div id="checks"></div>
+
+              <pre id="verification-details"></pre>
+            </div>
+
+            <hr>
+
+            <h3>Contract permission check</h3>
+
+            <p class="muted">
+              Simulate an issuance call from an unapproved local account.
+              The contract should reject it with “Approved issuer only.”
+              This is a read-only transaction simulation.
+            </p>
+
+            <button class="secondary" id="unauthorized">
+              Test unauthorized issuer
+            </button>
+
+            <div
+              id="unauthorized-result"
+              class="result"
+              hidden
+            ></div>
+          </article>
+        </div>
+      </section>
+
+      <!-- Blockchain activity -->
+      <section class="page" id="activity" hidden>
+        <div class="eyebrow">
+          ETHEREUM / REGISTRY EVENTS
+        </div>
+
+        <h1>Inspect what changed.</h1>
+
+        <p class="lead">
+          These entries are read from the contract's event logs
+          on the local Ethereum development chain.
+        </p>
+
+        <button class="secondary" id="refresh-activity">
+          Refresh blockchain activity
+        </button>
+
+        <article class="card activity-card">
+          <div id="events"></div>
+        </article>
+      </section>
+
+      <footer>
+        CredChain · Academic credential verification
+        <span>Local Ethereum network</span>
+      </footer>
+    </div>
+  </main>
+</body>
+</html>
